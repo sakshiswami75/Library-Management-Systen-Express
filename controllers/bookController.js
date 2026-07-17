@@ -330,13 +330,16 @@ const getMyBorrowedBooks = async (req, res) => {
         const user = await User.findById(req.user.id)
             .populate("borrowedBooks.book");
 
-        const currentBooks = user.borrowedBooks.filter(
-            (item) => item.returned === false
-        );
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found",
+            });
+        }
 
         res.status(200).json({
             success: true,
-            data: currentBooks,
+            data: user.borrowedBooks,
         });
 
     } catch (error) {
@@ -347,11 +350,37 @@ const getMyBorrowedBooks = async (req, res) => {
     }
 };
 
+const searchBooks = async (req, res) => {
+    try {
+        const { keyword } = req.query;
+
+        const books = await Book.find({
+            $or: [
+                { title: { $regex: keyword, $options: "i" } },
+                { author: { $regex: keyword, $options: "i" } },
+                { category: { $regex: keyword, $options: "i" } }
+            ]
+        });
+
+        res.status(200).json({
+            success: true,
+            count: books.length,
+            data: books
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
 module.exports = {
     addNewBook,
     getAllBooks,
     getSingleBookByID,
     updateBook,
     deleteBook,
-    borrowBook,returnBook,getMyBorrowedBooks
+    borrowBook,returnBook,getMyBorrowedBooks,searchBooks
 };
