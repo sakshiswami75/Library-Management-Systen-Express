@@ -1,6 +1,6 @@
 # 📚 Library Management System (Backend)
 
-A RESTful backend application developed using **Node.js**, **Express.js**, **MongoDB**, and **Mongoose** following the **MVC Architecture**. The project provides secure user authentication, role-based authorization, and complete library management functionalities including book management, borrowing, returning, and viewing borrowed books.
+A RESTful backend application developed using **Node.js**, **Express.js**, **MongoDB**, and **Mongoose** following the **MVC Architecture**. The project provides secure user authentication, role-based authorization, and complete library management functionalities including book management, searching, borrowing, returning, and viewing borrowing history.
 
 ---
 
@@ -19,9 +19,10 @@ A RESTful backend application developed using **Node.js**, **Express.js**, **Mon
 - Delete Book (Admin)
 - View All Books
 - View Single Book
+- Search Books (Title, Author, Category)
 - Borrow Book
 - Return Book
-- View My Borrowed Books
+- View Borrowing History
 
 ## Validation
 - Required Field Validation
@@ -42,6 +43,7 @@ A RESTful backend application developed using **Node.js**, **Express.js**, **Mon
 - JWT (JSON Web Token)
 - bcryptjs
 - dotenv
+- Thunder Client
 
 ---
 
@@ -66,11 +68,13 @@ Library-Management-System/
 │   └── Book.js
 │
 ├── routes/
-│   ├── authRoutes.js
-│   └── bookRoutes.js
+│   ├── authRoute.js
+│   └── bookRoute.js
 │
 ├── .env
+├── .gitignore
 ├── package.json
+├── package-lock.json
 ├── server.js
 └── README.md
 ```
@@ -79,19 +83,19 @@ Library-Management-System/
 
 # Installation
 
-## 1. Clone the Repository
+## Clone Repository
 
 ```bash
 git clone <repository-url>
 ```
 
-## 2. Install Dependencies
+## Install Dependencies
 
 ```bash
 npm install
 ```
 
-## 3. Configure Environment Variables
+## Configure Environment Variables
 
 Create a `.env` file.
 
@@ -101,13 +105,13 @@ MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
 ```
 
-## 4. Start the Server
+## Start Server
 
 ```bash
 npm run dev
 ```
 
-Server will run on:
+Server runs on:
 
 ```
 http://localhost:5000
@@ -130,30 +134,29 @@ http://localhost:5000
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | /api/book/add | Add a new book (Admin) |
-| GET | /api/book/getall | Get all books |
-| GET | /api/book/get/:id | Get single book |
-| PUT | /api/book/update/:id | Update book (Admin) |
-| DELETE | /api/book/delete/:id | Delete book (Admin) |
-| POST | /api/book/:id/borrow | Borrow a book |
-| POST | /api/book/:id/return | Return a book |
-| GET | /api/book/getmybooks | Get currently borrowed books |
+| POST | /api/book/add | Add Book (Admin) |
+| GET | /api/book/getall | Get All Books |
+| GET | /api/book/get/:id | Get Single Book |
+| PUT | /api/book/update/:id | Update Book (Admin) |
+| DELETE | /api/book/delete/:id | Delete Book (Admin) |
+| GET | /api/book/search?keyword=value | Search Books |
+| POST | /api/book/:id/borrow | Borrow Book |
+| POST | /api/book/:id/return | Return Book |
+| GET | /api/book/getmybooks | View Borrowing History |
 
 ---
 
 # Authentication
 
-Protected routes require a JWT token.
+Protected endpoints require a JWT token.
 
-**Header**
-
-```http
-Authorization: Bearer <your_jwt_token>
+```
+Authorization: Bearer <JWT_TOKEN>
 ```
 
 ---
 
-# Book Model
+# Book Schema
 
 ```json
 {
@@ -168,7 +171,7 @@ Authorization: Bearer <your_jwt_token>
 
 ---
 
-# User Model
+# User Schema
 
 ```json
 {
@@ -179,8 +182,8 @@ Authorization: Bearer <your_jwt_token>
   "borrowedBooks": [
     {
       "book": "Book ID",
-      "borrowDate": "Date",
-      "dueDate": "Date",
+      "borrowDate": "2026-07-17",
+      "dueDate": "2026-08-17",
       "returned": false
     }
   ]
@@ -203,18 +206,21 @@ Authorization: Bearer <your_jwt_token>
 
 # API Testing
 
-Use **Thunder Client** or **Postman** to test all API endpoints.
+The APIs were tested using **Thunder Client**.
 
 ---
 
 # Future Enhancements
 
-- Book Search
-- Borrow History
+- Filter Books by Category
+- Pagination
+- Sorting
+- Dashboard Statistics
 - Fine Management
 - Due Date Notifications
-- Pagination
-- Dashboard Analytics
+- Email Notifications
+- React Frontend
+- Deployment
 
 ---
 
