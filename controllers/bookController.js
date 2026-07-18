@@ -376,11 +376,56 @@ const searchBooks = async (req, res) => {
     }
 };
 
+const getAvailableBooks = async (req, res) => {
+    try {
+        const books = await Book.find({
+            availableCopies: { $gt: 0 }
+        });
+
+        res.status(200).json({
+            success: true,
+            count: books.length,
+            data: books
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+const getUnavailableBooks = async (req, res) => {
+    try {
+        const books = await Book.find({
+            availableCopies: 0
+        });
+
+        res.status(200).json({
+            success: true,
+            count: books.length,
+            data: books
+        });
+
+    } catch (error) {
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
 module.exports = {
     addNewBook,
     getAllBooks,
     getSingleBookByID,
     updateBook,
     deleteBook,
-    borrowBook,returnBook,getMyBorrowedBooks,searchBooks
+    borrowBook,
+    returnBook,
+    getMyBorrowedBooks,
+    searchBooks,
+    getAvailableBooks,
+    getUnavailableBooks
 };
