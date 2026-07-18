@@ -91,7 +91,7 @@ Library-Management-System/
 ## Clone Repository
 
 ```bash
-git clone <repository-url>
+git clone https://github.com/sakshiswami75/Library-Management-Systen-Express.git
 ```
 
 ## Install Dependencies
