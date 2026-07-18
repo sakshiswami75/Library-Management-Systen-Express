@@ -1,6 +1,6 @@
 const express = require('express')
 const { create } = require('../models/User')
-const { addNewBook, getAllBooks, updateBook, deleteBook, getSingleBookByID, borrowBook, returnBook, getMyBorrowedBooks, searchBooks } = require('../controllers/bookController')
+const { addNewBook, getAllBooks, updateBook, deleteBook, getSingleBookByID, borrowBook, returnBook, getMyBorrowedBooks, searchBooks, getAvailableBooks, getUnavailableBooks } = require('../controllers/bookController')
 const authMiddleware = require('../middleware/authMiddleware')
 const adminMiddleware = require('../middleware/adminMiddleware')
 
@@ -15,4 +15,8 @@ router.post("/:id/borrow", authMiddleware, borrowBook);
 router.post("/:id/return", authMiddleware, returnBook);
 router.get('/getmybooks',authMiddleware,getMyBorrowedBooks)
 router.get("/search", authMiddleware, searchBooks);
+router.get("/available", authMiddleware, getAvailableBooks);
+router.get("/unavailable", authMiddleware, getUnavailableBooks);
+
+
 module.exports=router
