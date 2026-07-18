@@ -1,10 +1,10 @@
 # 📚 Library Management System (Backend)
 
-A RESTful backend application developed using **Node.js**, **Express.js**, **MongoDB**, and **Mongoose** following the **MVC Architecture**. The project provides secure user authentication, role-based authorization, and complete library management functionalities including book management, searching, borrowing, returning, and viewing borrowing history.
+A RESTful backend application developed using **Node.js**, **Express.js**, **MongoDB**, and **Mongoose** following the **MVC Architecture**. The project provides secure user authentication, role-based authorization, complete book management, borrowing & returning books, borrowing history, search functionality, and book availability management.
 
 ---
 
-# Features
+# 🚀 Features
 
 ## Authentication
 - User Registration
@@ -20,21 +20,26 @@ A RESTful backend application developed using **Node.js**, **Express.js**, **Mon
 - View All Books
 - View Single Book
 - Search Books (Title, Author, Category)
+- View Available Books
+- View Unavailable Books
+
+## Library Features
 - Borrow Book
 - Return Book
-- View Borrowing History
+- View Borrow History
+- Prevent Duplicate Borrowing
+- Automatically Update Available Copies
 
 ## Validation
 - Required Field Validation
 - Duplicate Email Validation
 - Duplicate ISBN Validation
-- Prevent Duplicate Book Borrowing
 - Proper Error Handling
 - HTTP Status Codes
 
 ---
 
-# Technologies Used
+# 🛠 Technologies Used
 
 - Node.js
 - Express.js
@@ -47,7 +52,7 @@ A RESTful backend application developed using **Node.js**, **Express.js**, **Mon
 
 ---
 
-# Project Structure
+# 📂 Project Structure
 
 ```
 Library-Management-System/
@@ -81,7 +86,7 @@ Library-Management-System/
 
 ---
 
-# Installation
+# ⚙️ Installation
 
 ## Clone Repository
 
@@ -119,14 +124,14 @@ http://localhost:5000
 
 ---
 
-# API Endpoints
+# 📌 API Endpoints
 
 ## Authentication
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | /api/auth/register | Register a new user |
-| POST | /api/auth/login | Login user |
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Login user |
 
 ---
 
@@ -134,29 +139,31 @@ http://localhost:5000
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | /api/book/add | Add Book (Admin) |
-| GET | /api/book/getall | Get All Books |
-| GET | /api/book/get/:id | Get Single Book |
-| PUT | /api/book/update/:id | Update Book (Admin) |
-| DELETE | /api/book/delete/:id | Delete Book (Admin) |
-| GET | /api/book/search?keyword=value | Search Books |
-| POST | /api/book/:id/borrow | Borrow Book |
-| POST | /api/book/:id/return | Return Book |
-| GET | /api/book/getmybooks | View Borrowing History |
+| POST | `/api/book/add` | Add Book (Admin) |
+| GET | `/api/book/getall` | Get All Books |
+| GET | `/api/book/get/:id` | Get Single Book |
+| PUT | `/api/book/update/:id` | Update Book (Admin) |
+| DELETE | `/api/book/delete/:id` | Delete Book (Admin) |
+| GET | `/api/book/search?keyword=value` | Search Books |
+| GET | `/api/book/available` | Get Available Books |
+| GET | `/api/book/unavailable` | Get Unavailable Books |
+| POST | `/api/book/:id/borrow` | Borrow Book |
+| POST | `/api/book/:id/return` | Return Book |
+| GET | `/api/book/getmybooks` | View Borrow History |
 
 ---
 
-# Authentication
+# 🔐 Authentication
 
-Protected endpoints require a JWT token.
+Protected routes require a JWT Token.
 
 ```
-Authorization: Bearer <JWT_TOKEN>
+Authorization: Bearer <your_jwt_token>
 ```
 
 ---
 
-# Book Schema
+# 📖 Book Schema
 
 ```json
 {
@@ -171,7 +178,7 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-# User Schema
+# 👤 User Schema
 
 ```json
 {
@@ -183,7 +190,7 @@ Authorization: Bearer <JWT_TOKEN>
     {
       "book": "Book ID",
       "borrowDate": "2026-07-17",
-      "dueDate": "2026-08-17",
+      "dueDate": "2026-07-24",
       "returned": false
     }
   ]
@@ -192,38 +199,39 @@ Authorization: Bearer <JWT_TOKEN>
 
 ---
 
-# HTTP Status Codes
+# 📊 HTTP Status Codes
 
-- **200** – Success
-- **201** – Created
-- **400** – Bad Request
-- **401** – Unauthorized
-- **403** – Forbidden
-- **404** – Not Found
-- **500** – Internal Server Error
-
----
-
-# API Testing
-
-The APIs were tested using **Thunder Client**.
+| Status Code | Description |
+|-------------|-------------|
+| 200 | Success |
+| 201 | Created |
+| 400 | Bad Request |
+| 401 | Unauthorized |
+| 403 | Forbidden |
+| 404 | Not Found |
+| 500 | Internal Server Error |
 
 ---
 
-# Future Enhancements
+# 🧪 API Testing
 
-- Filter Books by Category
+All APIs were tested using **Thunder Client**.
+
+---
+
+# 🔮 Future Enhancements
+
 - Pagination
-- Sorting
+- Book Sorting
 - Dashboard Statistics
 - Fine Management
 - Due Date Notifications
 - Email Notifications
 - React Frontend
-- Deployment
+- Project Deployment
 
 ---
 
-# Author
+# 👩‍💻 Author
 
 **Sakshi Swami**
